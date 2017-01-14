@@ -17,3 +17,4 @@ crashlytics-build.properties
 fabric.properties
 *.iml
 **/target/
+**/node_modules
