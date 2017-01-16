@@ -1,0 +1,23 @@
+<div growl></div>
+<div>
+    <div class="header">
+        <h1>Hello, {{listDep.name}}</h1>
+    </div>
+    <div class="department-list">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="dep in listDep.departments">
+                {{dep.departmentName}}
+                <div class="department-buttons">
+                    <label><input class="btn btn-default" ng-click="listDep.editDepartment(dep.idDepartment)"
+                                  type="submit" value="Edit"></label>
+                    <label><input class="btn btn-default" ng-click="listDep.removeDepartment(dep)"
+                                  type="submit" value="Remove"></label>
+                    <label><input class="btn btn-default" ng-click="listDep.listEmployees(dep.idDepartment)"
+                                  type="submit" value="List"></label>
+                </div>
+            </li>
+        </ul>
+        <input class="button-add btn btn-default" ng-click="listDep.addDepartment()" type="submit"
+               value="Add Department">
+    </div>
+</div>

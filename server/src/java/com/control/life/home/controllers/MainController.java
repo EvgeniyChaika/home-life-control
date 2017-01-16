@@ -9,6 +9,6 @@ public class MainController {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String indexPage() {
-        return "index";
+        return "index.html";
     }
 }

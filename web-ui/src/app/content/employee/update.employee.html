@@ -1,0 +1,82 @@
+<div class="wrapper-add-department">
+    <span class="employee-form">Department: </span>
+    <h2>{{updateEmpl.departmentName}}</h2>
+    <h3>Add new Employee here</h3>
+    <form class="form-group" id="data" name="emplForm" method="POST">
+        <label>
+            <span class="employee-form">Employee name:</span>
+            <div class='error' ng-if="emplForm.emplName.$error">
+                <div ng-repeat="errName in updateEmpl.errorEmployeeName">{{errName}}</div>
+                <div ng-show="emplForm.emplName.$error.required">You did not enter a field value
+                </div>
+                <div ng-show="emplForm.emplName.$error.maxlength">Name length should not exceed 30 characters</div>
+            </div>
+            <input type="text"
+                   class="form-control"
+                   name="emplName"
+                   placeholder="Name"
+                   ng-maxlength="30"
+                   ng-model="updateEmpl.employeeName"
+                   ng-required="true"
+            ></label>
+        <label>
+            <span class="employee-form">Employee e-mail:</span>
+            <div class='error' ng-if="emplForm.emplEmail.$error">
+                <div ng-repeat="errEmail in updateEmpl.errorEmployeeEmail">{{errEmail}}
+                </div>
+                <div ng-show="emplForm.emplEmail.$error.required">You did not enter a field value
+                </div>
+                <div ng-show="emplForm.emplEmail.$error.maxlength">Email length should not exceed 30 characters</div>
+                <div ng-show="emplForm.emplEmail.$error.email">This field must be a valid email address.</div>
+            </div>
+            <input type="email"
+                   class="form-control"
+                   name="emplEmail"
+                   placeholder="E-mail"
+                   ng-maxlength="30"
+                   ng-model="updateEmpl.employeeEmail"
+                   ng-required="true"
+            ></label>
+        <label>
+            <span class="employee-form">Employee salary:</span>
+            <div class='error' ng-if="emplForm.emplSalary.$error">
+                <div ng-repeat="errSalary in updateEmpl.errorEmployeeSalary">{{errSalary}}
+                </div>
+                <div ng-show="emplForm.emplSalary.$error.required">You did not enter a field value
+                </div>
+                <div ng-show="emplForm.emplSalary.$error.maxlength">Salary length should not exceed 9 characters</div>
+                <div ng-show="emplForm.emplSalary.$error.min">Salary must have positive value</div>
+                <div ng-show="emplForm.emplSalary.$error.number">Incorrect enter, only digits</div>
+            </div>
+            <input type="number"
+                   class="form-control"
+                   min="0"
+                   name="emplSalary"
+                   placeholder="Salary"
+                   ng-maxlength="9"
+                   string-to-number
+                   ng-model="updateEmpl.employeeSalary"
+                   ng-required="true"
+            ></label>
+        <label>
+            <span class="employee-form">Date of registration (yyyy-mm-dd):</span>
+            <div class='error' ng-if="emplForm.emplRegister.$error">
+                <div ng-repeat="errRegister in updateEmpl.errorEmployeeDate">{{errRegister}}
+                </div>
+                <div ng-show="emplForm.emplRegister.$error.required">You did not enter a field value
+                </div>
+                <div ng-show="emplForm.emplRegister.$error.date">Only date format</div>
+            </div>
+            <input type="date"
+                   class="form-control"
+                   name="emplRegister"
+                   ng-model="updateEmpl.employeeRegister"
+                   placeholder="Date"
+                   ng-required="true"
+            ></label>
+    </form>
+    <input class="btn btn-default" form="data" ng-disabled="emplForm.$invalid" ng-click="updateEmpl.saveEmployee()"
+           type="submit" value="Save">
+    <input class="cancel-add-department btn btn-default" type="submit"
+           ng-click="updateEmpl.toListEmployees()" value="Cancel">
+</div>

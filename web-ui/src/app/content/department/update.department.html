@@ -1,0 +1,20 @@
+<div class="wrapper-add-department">
+    <h3>Enter New Department name here</h3>
+    <form class="form-group" name="depForm" id="data">
+        <div class='error' ng-if="depForm.depName.$error">
+            <div ng-repeat="error in updateDep.errorEnterNameDep">{{error}}</div>
+            <div ng-show="depForm.depName.$error.required">You did not enter a field value</div>
+            <div ng-show="depForm.depName.$error.maxlength">Name length should not exceed 30 characters</div>
+        </div>
+        <label><input type="text"
+                      class="form-control"
+                      name="depName"
+                      placeholder="Department name"
+                      ng-model="updateDep.departmentName"
+                      ng-maxlength="30"
+                      ng-required="true"
+        ></label>
+    </form>
+    <input class="btn btn-default" form="data" ng-disabled="depForm.$invalid" ng-click="updateDep.saveDepartment()" type="submit" value="Save">
+    <input class="btn btn-default" ng-click="updateDep.toMainPage()" type="submit" value="Cancel">
+</div>
