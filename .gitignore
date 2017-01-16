@@ -18,3 +18,4 @@ fabric.properties
 *.iml
 **/target/
 **/node_modules
+web-ui/dist
