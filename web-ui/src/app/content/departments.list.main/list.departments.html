@@ -3,9 +3,10 @@
     <div class="header">
         <h1>Hello, {{listDep.name}}</h1>
     </div>
+    <div>{{listDep.departments.data}}</div>
     <div class="department-list">
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="dep in listDep.departments">
+            <li class="list-group-item" ng-repeat="dep in listDep.departmentsData.data">
                 {{dep.departmentName}}
                 <div class="department-buttons">
                     <label><input class="btn btn-default" ng-click="listDep.editDepartment(dep.idDepartment)"

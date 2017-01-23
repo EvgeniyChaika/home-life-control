@@ -2,7 +2,7 @@
 
 console.log('index');
 
-import './styles/style.css';
+import './styles/main.less';
 
 import  'jquery';
 

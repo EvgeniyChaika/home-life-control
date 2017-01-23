@@ -15,7 +15,6 @@ class ListDepartmentsController {
         _$uibModal.set(vm, $uibModal);
         _notification.set(vm, Notification);
         _departmentsService.set(vm, DepartmentsService);
-        vm.departments = vm.departmentsData.data;
         vm.department = {};
         vm.init();
     }
@@ -73,7 +72,7 @@ ListDepartmentsController.$inject = ['$state', '$uibModal', 'Notification', 'Dep
 const ListDepartmentsComponent = {
     controller: ListDepartmentsController,
     controllerAs: 'listDep',
-    templateUrl: './resources/app/content/departments.list.main/list.departments.html',
+    template: require('./list.departments.html'),
     bindings: {
         departmentsData: '<'
     }

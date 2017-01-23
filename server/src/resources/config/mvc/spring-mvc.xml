@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <mvc:annotation-driven/>
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.control.life.home.controllers" />
+
+
+    <mvc:resources mapping="/**" location="classpath:/static/" />
+
+    <bean name="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="useSuffixPatternMatch" value="false"/>
+        <property name="useRegisteredSuffixPatternMatch" value="false"/>
+    </bean>
+
+
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--&lt;!&ndash;<property name="prefix" value="/WEB-INF/jsp/"/>&ndash;&gt;-->
+        <!--<property name="prefix" value="/web-ui/target/static/"/>-->
+        <!--&lt;!&ndash;<property name="suffix" value=".jsp"/>&ndash;&gt;-->
+        <!--<property name="suffix" value=".html"/>-->
+    <!--</bean>-->
+
+</beans>

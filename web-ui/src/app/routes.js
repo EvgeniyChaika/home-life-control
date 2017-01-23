@@ -11,13 +11,21 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             resolve: {
                 departments: (DepartmentsService) => DepartmentsService.getAllDepartments()
             }
+            // resolve: {
+            //     departments: (DepartmentsService) => DepartmentsService.getAllDepartments(null,null,false)
+            // }
+            // resolve: {
+            //     departments: ['DepartmentsService', (DepartmentsService) => {
+            //         return DepartmentsService.getAllDepartments(null, null, false);
+            //     }]
+            // }
         })
         .state('editDepartment', {
             url: '/add-editDepartment/idDepartment=:idDepartment',
             template: '<department department-data="$resolve.department"></department>',
             title: 'department',
             resolve: {
-                department: (DepartmentsService, $stateParams) =>($stateParams.idDepartment) ? DepartmentsService.findByIdDepartment($stateParams.idDepartment) : null
+                department: (DepartmentsService, $stateParams) => ($stateParams.idDepartment) ? DepartmentsService.findByIdDepartment($stateParams.idDepartment) : null
             }
         })
         .state('listEmployees', {
@@ -26,7 +34,7 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             title: 'employeesList',
             resolve: {
                 department: (DepartmentsService, $stateParams) => ($stateParams.idDepartment) ? DepartmentsService.findByIdDepartment($stateParams.idDepartment) : null,
-                employees: (EmployeesService, $stateParams) =>($stateParams.idDepartment) ? EmployeesService.getAllEmployees($stateParams.idDepartment) : null
+                employees: (EmployeesService, $stateParams) => ($stateParams.idDepartment) ? EmployeesService.getAllEmployees($stateParams.idDepartment) : null
             }
         })
         .state('editEmployee', {
