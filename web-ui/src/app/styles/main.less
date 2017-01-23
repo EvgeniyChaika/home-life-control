@@ -1,0 +1,187 @@
+@import '~reset-css/reset.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~angular-ui-notification/dist/angular-ui-notification.css';
+
+#wrapper {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto 150px;
+}
+
+.header {
+    padding: 40px;
+}
+
+.department-buttons {
+    float: right;
+}
+
+label {
+    margin-bottom: 0;
+    display: block;
+}
+
+.department-buttons label {
+    display: inline-block;
+    visibility: hidden;
+    float: left;
+    margin-left: 10px;
+}
+
+.department-list {
+    padding: 10px;
+    background: lightgray;
+}
+
+.list-group {
+    display: block;
+    padding-left: 0;
+    max-width: 1400px;
+    width: 100%;
+}
+
+.list-group-item {
+    display: inline-block;
+    border: 1px solid black;
+    width: inherit;
+    padding: 5px 5px 5px 15px;
+    font-size: 24px;
+    vertical-align: middle;
+    line-height: 36px;
+}
+
+[type="submit"] {
+    display: inline-block;
+    padding: 5px 20px;
+    width: 120px;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.button-add {
+    margin-top: 40px;
+    width: auto;
+}
+
+.list-group {
+    margin-bottom: 0;
+}
+
+.list-group-item:hover .department-buttons label {
+    visibility: visible;
+}
+
+/*--------------------------add_department.jsp-----------------------------*/
+h3 {
+    margin: 0 0 30px;
+}
+
+.wrapper-add-department {
+    padding: 30px;
+    background: lightblue;
+    max-width: 430px;
+    width: 100%;
+    margin: 30px auto 0;
+}
+
+.form-control {
+    height: 40px;
+    font-size: 24px;
+    width: 365px;
+    margin: 0 auto 10px;
+    font-weight: 200;
+}
+
+.cancel-add-department {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/*--------------------------------- list_employees.jsp ----------------------------*/
+.wrapper-employees {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 150px;
+}
+
+.add-employee {
+    margin: 40px 0 0;
+    float: left;
+}
+
+.cancel-employees {
+    margin: 40px 0 0 10px;
+}
+
+.edit-employee {
+    margin-right: 10px;
+    float: left;
+}
+
+.department-list th:first-child {
+    width: 65px;
+}
+
+.department-list th:nth-child(3) {
+    width: 300px;
+}
+
+.department-list th:nth-child(4),
+.department-list th:nth-child(5) {
+    width: 135px;
+}
+
+.department-list th:last-child {
+    width: 260px;
+}
+
+.employee-form {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.wrapper-add-department > h2 {
+    margin: 0 0 30px;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+    font-weight: 600
+}
+
+.modal-remove-department {
+    float: left;
+    width: 300px;
+    height: 300px;
+    background-color: darkgray;
+}
+
+.margin-buttons {
+    margin: 4% 0 4% 30%;
+}
+
+.margin-buttons label:first-child {
+    margin-right: 2%;
+}
+
+.remove-button {
+    display: inline-block;
+}
+
+.employees-main-button {
+    width: auto;
+}
+
+.modal-text {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+}
+
+.modal-text p:first-child {
+    margin-top: 10px;
+}

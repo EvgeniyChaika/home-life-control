@@ -1,0 +1,37 @@
+<div class="wrapper-employees">
+    <div class="header">
+        <h1>List of Employees</h1>
+        <h2>Department: {{listEmpl.departmentName}}</h2>
+    </div>
+    <div class="department-list">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Salary</th>
+                <th>Register Date</th>
+                <th>Edit / Delete</th>
+            </tr>
+            <tr ng-repeat="empl in listEmpl.employees">
+                <td>{{empl.employeeId}}</td>
+                <td>{{empl.employeeName}}</td>
+                <td>{{empl.employeeEmail}}</td>
+                <td>{{empl.employeeSalary}}</td>
+                <td>{{empl.employeeRegister | date:"yyyy-MM-dd"}}</td>
+                <td>
+                    <input class="btn btn-default"
+                               type="submit"
+                               ng-click="listEmpl.editEmployee(empl.employeeId)"
+                               value="Edit">
+                    <input class="btn btn-default"
+                               type="submit"
+                               ng-click="listEmpl.removeEmployee(empl.employeeId)"
+                               value="Remove">
+                </td>
+            </tr>
+        </table>
+            <input class="employees-main-button btn btn-default add-employee" ng-click="listEmpl.addEmployee()" type="submit" value="Add Employee">
+            <input class="employees-main-button btn btn-default cancel-employees" ng-click="listEmpl.toMainPage()" type="submit" value="Cancel">
+    </div>
+</div>
