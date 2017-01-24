@@ -14,26 +14,7 @@ class DepartmentsService {
     }
 
     getAllDepartments() {
-        console.log("getAllDepartments!!!!!");
         return _$http.get(vm).get('/ajaxListDepartments');
-        // return _$q.get(vm)((resolve, reject) => {
-        //     _$http.get(vm)({
-        //         url: '/ajaxListDepartments',
-        //         method: "GET",
-        //         params: params,
-        //         headers: headers
-        //     }).then((response)=> {
-        //
-        //         if (isRawDataReturn) {
-        //             resolve(response);
-        //         }
-        //
-        //         resolve(response.data);
-        //
-        //     }, (reason)=> {
-        //         resolve(null);
-        //     })
-        // });
     }
 
     removeDep(idDepartment) {

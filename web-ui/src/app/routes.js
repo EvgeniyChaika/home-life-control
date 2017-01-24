@@ -11,14 +11,6 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             resolve: {
                 departments: (DepartmentsService) => DepartmentsService.getAllDepartments()
             }
-            // resolve: {
-            //     departments: (DepartmentsService) => DepartmentsService.getAllDepartments(null,null,false)
-            // }
-            // resolve: {
-            //     departments: ['DepartmentsService', (DepartmentsService) => {
-            //         return DepartmentsService.getAllDepartments(null, null, false);
-            //     }]
-            // }
         })
         .state('editDepartment', {
             url: '/add-editDepartment/idDepartment=:idDepartment',

@@ -5,7 +5,7 @@ const _$state = new WeakMap();
 const _employeesService = new WeakMap();
 
 class UpdateEmployeeController {
-    constructor($state, EmployeesService) {
+    constructor($state, EmployeesService, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _employeesService.set(vm, EmployeesService);
@@ -15,15 +15,15 @@ class UpdateEmployeeController {
         vm.employeeSalary = '';
         vm.employeeRegister = '';
 
-        vm.departmentName = vm.departmentData.data.departmentName;
-        vm.idDepartment = vm.departmentData.data.idDepartment;
+        vm.departmentName = $scope.$parent.$resolve.department.data.departmentName;
+        vm.idDepartment = $scope.$parent.$resolve.department.data.idDepartment;
 
-        if (vm.employeeData !== null && vm.employeeData.data !== null) {
-            vm.employeeId = vm.employeeData.data.employeeId;
-            vm.employeeName = vm.employeeData.data.employeeName;
-            vm.employeeEmail = vm.employeeData.data.employeeEmail;
-            vm.employeeSalary = vm.employeeData.data.employeeSalary;
-            vm.employeeRegister = new Date(vm.employeeData.data.employeeRegister);
+        if ($scope.$parent.$resolve.employee !== null && $scope.$parent.$resolve.employee.data !== null) {
+            vm.employeeId = $scope.$parent.$resolve.employee.data.employeeId;
+            vm.employeeName = $scope.$parent.$resolve.employee.data.employeeName;
+            vm.employeeEmail = $scope.$parent.$resolve.employee.data.employeeEmail;
+            vm.employeeSalary = $scope.$parent.$resolve.employee.data.employeeSalary;
+            vm.employeeRegister = new Date($scope.$parent.$resolve.employee.data.employeeRegister);
         }
 
         vm.errorEmployeeName = [];
@@ -88,12 +88,12 @@ class UpdateEmployeeController {
     }
 }
 
-UpdateEmployeeController.$inject = ['$state', 'EmployeesService'];
+UpdateEmployeeController.$inject = ['$state', 'EmployeesService', '$scope'];
 
 const UpdateEmployeeComponent = {
     controller: UpdateEmployeeController,
     controllerAs: 'updateEmpl',
-    templateUrl: 'resources/app/content/employee/update.employee.html',
+    template: require('./update.employee.html'),
     bindings: {
         departmentData: '<',
         employeeData: '<'

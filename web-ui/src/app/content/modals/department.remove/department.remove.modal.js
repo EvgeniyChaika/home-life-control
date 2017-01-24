@@ -5,21 +5,22 @@ const _$state = new WeakMap();
 const _departmentsService = new WeakMap();
 
 class ModalRemoveDepartmentController {
-    constructor($state, DepartmentsService) {
+    constructor($state, DepartmentsService, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _departmentsService.set(vm, DepartmentsService);
-        vm.idDepartment = vm.resolve.idDepartment;
+        vm.idDepartment = $scope.$parent.$resolve.idDepartment;
     }
 
     remove() {
         _departmentsService.get(vm).removeDep(vm.idDepartment)
-            .success(() => {
+            .then((response) => {
+                console.log(response.data);
                 vm.modalInstance.close({
                     message: 'OK'
                 });
             })
-            .error((error) => {
+            .catch((error) => {
                 console.error(error);
                 vm.modalInstance.close({
                     message: 'Error'
@@ -34,14 +35,14 @@ class ModalRemoveDepartmentController {
     }
 }
 
-ModalRemoveDepartmentController.$inject = ['$state', 'DepartmentsService'];
+ModalRemoveDepartmentController.$inject = ['$state', 'DepartmentsService', '$scope'];
 
 const ModalRemoveDepartmentComponent = {
     controller: ModalRemoveDepartmentController,
     controllerAs: 'modalDep',
-    templateUrl: './resources/app/content/modals/department.remove/department.remove.modal.html',
+    template: require('./department.remove.modal.html'),
     bindings: {
-        modalInstance: "<",
+        modalInstance: '<',
         resolve: '<'
     }
 };

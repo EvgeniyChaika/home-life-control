@@ -5,16 +5,16 @@ const _$state = new WeakMap();
 const _departmentsService = new WeakMap();
 
 class UpdateDepartmentController {
-    constructor($state, DepartmentsService) {
+    constructor($state, DepartmentsService, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _departmentsService.set(vm, DepartmentsService);
         vm.departmentName = '';
         vm.idDepartment = null;
 
-        if (vm.departmentData !== null) {
-            vm.departmentName = vm.departmentData.data.departmentName;
-            vm.idDepartment = vm.departmentData.data.idDepartment;
+        if ($scope.$parent.$resolve.department !== null) {
+            vm.departmentName = $scope.$parent.$resolve.department.data.departmentName;
+            vm.idDepartment = $scope.$parent.$resolve.department.data.idDepartment;
         }
         vm.errorEnterNameDep = [];
     }
@@ -45,14 +45,14 @@ class UpdateDepartmentController {
     }
 }
 
-UpdateDepartmentController.$inject = ['$state', 'DepartmentsService'];
+UpdateDepartmentController.$inject = ['$state', 'DepartmentsService', '$scope'];
 
 const UpdateDepartmentComponent = {
     controller: UpdateDepartmentController,
     controllerAs: 'updateDep',
-    templateUrl: 'resources/app/content/department/update.department.html',
+    template: require('./update.department.html'),
     bindings: {
-        departmentData: '<'
+        departmentData: '='
     }
 };
 

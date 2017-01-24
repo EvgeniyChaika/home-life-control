@@ -6,14 +6,14 @@ const _$uibModal = new WeakMap();
 const _employeesService = new WeakMap();
 
 class ListEmployeesController {
-    constructor($state, $uibModal, EmployeesService) {
+    constructor($state, $uibModal, EmployeesService, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _$uibModal.set(vm, $uibModal);
         _employeesService.set(vm, EmployeesService);
-        vm.departmentName = vm.departmentData.data.departmentName;
-        vm.idDepartment = vm.departmentData.data.idDepartment;
-        vm.employees = vm.employeesData.data;
+        vm.departmentName = $scope.$parent.$resolve.department.data.departmentName;
+        vm.idDepartment = $scope.$parent.$resolve.department.data.idDepartment;
+        vm.employees = $scope.$parent.$resolve.employees.data;
     }
 
     editEmployee(employeeId) {
@@ -24,12 +24,12 @@ class ListEmployeesController {
     }
 
     removeEmployee(employeeId) {
-        let modalInstance = _$uibModal.get(vm).open({
+        vm.modalInstance = _$uibModal.get(vm).open({
             component: 'removeEmployee',
             resolve: {employeeId}
         });
 
-        modalInstance.result.then((result) => {
+        vm.modalInstance.result.then((result) => {
                 if (result.message === 'OK') {
                     _employeesService.get(vm).getAllEmployees(vm.idDepartment)
                         .then((response) => {
@@ -54,12 +54,12 @@ class ListEmployeesController {
     }
 }
 
-ListEmployeesController.$inject = ['$state', '$uibModal', 'EmployeesService'];
+ListEmployeesController.$inject = ['$state', '$uibModal', 'EmployeesService', '$scope'];
 
 const ListEmployeesComponent = {
     controller: ListEmployeesController,
     controllerAs: 'listEmpl',
-    templateUrl: 'resources/app/content/employees.list/list.employees.html',
+    template: require('./list.employees.html'),
     bindings: {
         departmentData: '<',
         employeesData: '<'
