@@ -2,6 +2,7 @@ package com.control.life.home.dao;
 
 
 import com.control.life.home.models.Department;
+
 import java.util.Collection;
 
 /**

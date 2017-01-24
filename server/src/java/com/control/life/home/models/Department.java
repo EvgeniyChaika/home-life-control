@@ -1,7 +1,7 @@
 package com.control.life.home.models;
 
 import com.control.life.home.utils.UniqueCheckAnnotation;
-import com.google.gson.annotations.Expose;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.Length;
 import net.sf.oval.constraint.NotEmpty;
@@ -31,7 +31,7 @@ public class Department implements Serializable {
     @CheckWith(value = UniqueCheckAnnotation.class, message = "Department with the same name already exists")
     private String departmentName;
 
-    @Expose
+    @JsonIgnore
     @OneToMany(targetEntity = Employee.class, cascade = CascadeType.ALL, mappedBy = "department")
     private List<Employee> employeeList;
 

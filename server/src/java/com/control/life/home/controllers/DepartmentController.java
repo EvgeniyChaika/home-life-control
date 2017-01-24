@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +29,7 @@ public class DepartmentController {
     @RequestMapping("/ajaxListDepartments")
     @ResponseBody
     public Collection ajaxListDepartments() {
-        ArrayList<Department> list = new ArrayList();
-        Department department = new Department();
-        department.setIdDepartment(1L);
-        department.setDepartmentName("Test");
-        department.setEmployeeList(null);
-        list.add(department);
-        return list;
-//        return departmentService.findAll();
-
+        return departmentService.findAll();
     }
 
     @RequestMapping(value = "/ajaxFindByIdDepartment", method = RequestMethod.GET)

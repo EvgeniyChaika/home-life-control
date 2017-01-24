@@ -9,19 +9,19 @@ const _notification = new WeakMap();
 const _departmentsService = new WeakMap();
 
 class ListDepartmentsController {
-    constructor($state, $uibModal, Notification, DepartmentsService) {
+    constructor($state, $uibModal, Notification, DepartmentsService, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _$uibModal.set(vm, $uibModal);
         _notification.set(vm, Notification);
         _departmentsService.set(vm, DepartmentsService);
+        vm.departments = $scope.$parent.$resolve.departments.data;
         vm.department = {};
         vm.init();
     }
 
     init() {
         vm.name = user;
-        console.log('ListDepartmentsControllers');
     }
 
     addDepartment() {
@@ -35,28 +35,29 @@ class ListDepartmentsController {
     }
 
     removeDepartment(department) {
-        let modalInstance = _$uibModal.get(vm).open({
+        vm.modalInstance = _$uibModal.get(vm).open({
             component: 'removeDepartment',
             resolve: {
                 idDepartment: department.idDepartment
             }
         });
 
-        modalInstance.result.then((result) => {
+        vm.modalInstance.result.then((result) => {
                 if (result.message === 'OK') {
                     _departmentsService.get(vm).getAllDepartments()
                         .then((response) => {
                             vm.departments = response.data;
                         });
-                    _notification.get(vm).success({
-                        title: 'Success!',
-                        message: `Department with name ${department.departmentName} was deleted!`
-                    });
+                    // _notification.get(vm).success({
+                    //     title: 'Success!',
+                    //     message: `Department with name ${department.departmentName} was deleted!`
+                    // });
                 } else if (result.message === 'Error') {
-                    _notification.get(vm).error({
-                        title: 'Error!',
-                        message: `Department with name ${department.departmentName} wasn't found!`
-                    });
+                    // _notification.get(vm)
+                    //     .error({
+                    //         title: 'Error!',
+                    //         message: `Department with name ${department.departmentName} wasn't found!`
+                    //     });
                 }
             }
         );
@@ -67,7 +68,7 @@ class ListDepartmentsController {
     }
 }
 
-ListDepartmentsController.$inject = ['$state', '$uibModal', 'Notification', 'DepartmentsService'];
+ListDepartmentsController.$inject = ['$state', '$uibModal', 'Notification', 'DepartmentsService', '$scope'];
 
 const ListDepartmentsComponent = {
     controller: ListDepartmentsController,
