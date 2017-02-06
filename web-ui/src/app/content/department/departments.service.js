@@ -1,7 +1,5 @@
 'use strict';
 
-console.log('department service');
-
 let vm;
 const _$http = new WeakMap();
 const _$q = new WeakMap();

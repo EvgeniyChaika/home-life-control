@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public interface DepartmentDAO {
 
-    void updateDepartment(Department department);
+    Department updateDepartment(Department department);
 
     Collection findAll();
 

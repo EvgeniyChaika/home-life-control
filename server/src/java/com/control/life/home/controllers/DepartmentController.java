@@ -2,6 +2,7 @@ package com.control.life.home.controllers;
 
 import com.control.life.home.custom.exception.ValidationException;
 import com.control.life.home.models.Department;
+import com.control.life.home.services.DepartmentJob;
 import com.control.life.home.services.DepartmentService;
 import com.control.life.home.utils.CustomValidator;
 import com.control.life.home.utils.ModifyInputContent;
@@ -26,9 +27,20 @@ public class DepartmentController {
     @Autowired
     private CustomValidator customValidator;
 
+    @Autowired
+    private DepartmentJob departmentJob;
+
     @RequestMapping("/ajaxListDepartments")
     @ResponseBody
     public Collection ajaxListDepartments() {
+//        try {
+//            departmentJob.runDepartmentJob();
+//        } catch (JobParametersInvalidException
+//                | JobExecutionAlreadyRunningException
+//                | JobRestartException
+//                | JobInstanceAlreadyCompleteException e) {
+//            e.printStackTrace();
+//        }
         return departmentService.findAll();
     }
 

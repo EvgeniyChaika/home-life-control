@@ -1,7 +1,6 @@
 'use strict';
 
 const routers = ($stateProvider, $urlRouterProvider) => {
-    console.log('routes');
     $urlRouterProvider.otherwise('/');
     $stateProvider
         .state('mainPage', {

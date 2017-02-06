@@ -1,7 +1,5 @@
 'use strict';
 
-console.log('index');
-
 import './styles/main.less';
 
 import  'jquery';
@@ -39,6 +37,5 @@ angular.module(app, [
     .component('removeDepartment', ModalRemoveDepartmentComponent)
     .component('removeEmployee', ModalRemoveEmployeeComponent)
     .directive('stringToNumber', StringToNumber);
-
 
 angular.bootstrap(document, [app]);

@@ -4,10 +4,16 @@ import com.control.life.home.custom.exception.ValidationException;
 import com.control.life.home.dao.DepartmentDAO;
 import com.control.life.home.models.Department;
 import com.control.life.home.services.DepartmentService;
+import com.control.life.home.services.IntegrationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -17,8 +23,13 @@ import java.util.Collection;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
+    private Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+
     @Autowired
     private DepartmentDAO departmentDao;
+
+    @Autowired
+    private IntegrationService integrationService;
 
     @Transactional(readOnly = true)
     @Override
@@ -29,7 +40,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional()
     @Override
     public void updateDepartment(Department department) throws ValidationException {
-        departmentDao.updateDepartment(department);
+        Department updatedDepartment = departmentDao.updateDepartment(department);
+        try {
+            integrationService.createDepartmentXML(updatedDepartment);
+        } catch (JAXBException | IOException e) {
+            logger.error("Department XML file wasn't create. Department Id - " + updatedDepartment.getIdDepartment());
+            logger.error("Stack trace - " + Arrays.toString(e.getStackTrace()));
+        }
     }
 
     @Transactional

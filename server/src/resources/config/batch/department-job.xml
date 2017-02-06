@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/batch
+       http://www.springframework.org/schema/batch/spring-batch.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <import resource="../spring-main.xml"/>
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql"/>
+        <jdbc:script location="org/springframework/batch/core/schema-mysql.sql"/>
+    </jdbc:initialize-database>
+
+    <batch:job id="personJob">
+        <batch:step id="step1">
+            <batch:tasklet>
+                <batch:chunk reader="itemReader"
+                             processor="itemProcessor"
+                             writer="itemWriter"
+                             commit-interval="10"/>
+                <batch:listeners>
+                    <batch:listener ref="stepExecutionStatsListener"/>
+                </batch:listeners>
+            </batch:tasklet>
+            <batch:fail on="FAILED"/>
+            <batch:end on="*"/>
+        </batch:step>
+    </batch:job>
+
+
+    <bean id="stepExecutionStatsListener" class="com.control.life.home.services.batch.StepExecutionStatsListener"/>
+
+    <bean id="jobRepository"
+          class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="databaseType" value="mysql"/>
+    </bean>
+
+    <bean id="jobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+          p:jobRepository-ref="jobRepository"/>
+
+    <bean id="itemReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader">
+        <property name="resource"
+                  value="classpath:/jobs/test-data.csv"/>
+        <property name="lineMapper">
+
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property name="lineTokenizer">
+                    <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+                        <property name="names" value="departmentName"/>
+                    </bean>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+                        <property name="targetType"
+                                  value="com.control.life.home.models.Department"/>
+                    </bean>
+                </property>
+            </bean>
+
+        </property>
+    </bean>
+
+    <bean id="itemProcessor" class="com.control.life.home.services.batch.DepartmentItemProcessor"/>
+
+    <bean id="itemWriter"
+          class="org.springframework.batch.item.database.JdbcBatchItemWriter">
+        <property name="itemSqlParameterSourceProvider">
+            <bean class="org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider"/>
+        </property>
+        <property name="sql">
+            <value>
+                <![CDATA[
+            	INSERT INTO departments (department_name) VALUE (:departmentName)
+            ]]>
+            </value>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>
