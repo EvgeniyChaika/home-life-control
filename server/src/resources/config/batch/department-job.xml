@@ -13,6 +13,7 @@
 
     <import resource="../spring-main.xml"/>
 
+
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="org/springframework/batch/core/schema-drop-mysql.sql"/>
         <jdbc:script location="org/springframework/batch/core/schema-mysql.sql"/>

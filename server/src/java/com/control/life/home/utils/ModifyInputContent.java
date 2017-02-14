@@ -1,6 +1,7 @@
 package com.control.life.home.utils;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 
 /**
@@ -12,6 +13,6 @@ public class ModifyInputContent {
     public static String modifyEnterName(String string) {
         string = string.trim();
         string = string.replaceAll(" +", "\\ ");
-        return string;
+        return StringUtils.capitalize(string.toLowerCase());
     }
 }

@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -41,12 +38,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void updateDepartment(Department department) throws ValidationException {
         Department updatedDepartment = departmentDao.updateDepartment(department);
-        try {
-            integrationService.createDepartmentXML(updatedDepartment);
-        } catch (JAXBException | IOException e) {
-            logger.error("Department XML file wasn't create. Department Id - " + updatedDepartment.getIdDepartment());
-            logger.error("Stack trace - " + Arrays.toString(e.getStackTrace()));
-        }
+        logger.info("Department with name " + updatedDepartment.getDepartmentName() + " was saved in the database.");
+//        try {
+//            integrationService.createDepartmentXML(updatedDepartment);
+//        } catch (JAXBException | IOException e) {
+//            logger.error("Department XML file wasn't create. Department Id - " + updatedDepartment.getIdDepartment());
+//            logger.error("Stack trace - " + Arrays.toString(e.getStackTrace()));
+//        }
     }
 
     @Transactional

@@ -33,14 +33,17 @@ public class DepartmentController {
     @RequestMapping("/ajaxListDepartments")
     @ResponseBody
     public Collection ajaxListDepartments() {
-//        try {
-//            departmentJob.runDepartmentJob();
+        try {
+            departmentJob.runDepartmentJob();
 //        } catch (JobParametersInvalidException
 //                | JobExecutionAlreadyRunningException
 //                | JobRestartException
 //                | JobInstanceAlreadyCompleteException e) {
-//            e.printStackTrace();
-//        }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
         return departmentService.findAll();
     }
 

@@ -29,7 +29,6 @@ public class CustomValidator {
         List<ConstraintViolation> violations = validator.validate(company);
         Map<String, List<String>> errorMap = new HashMap<>();
 
-
         for (ConstraintViolation violation : violations) {
             if (!violation.getMessage().isEmpty()) {
                 List<String> list = new ArrayList<>();
